@@ -1,7 +1,7 @@
 import { RootState } from "@/lib/store";
 import { createSlice, PayloadAction, createSelector } from "@reduxjs/toolkit";
 import { format, startOfMonth, endOfMonth, eachDayOfInterval } from "date-fns";
-import { ByDateState, Shift } from "./types";
+import { ByDateState, DayRow, Shift, Weekday } from "./types";
 
 const initialState: ByDateState = {};
 
@@ -16,7 +16,7 @@ const shiftsSlice = createSlice({
   name: "shifts",
   initialState,
   reducers: {
-    setAllByDate: (_state, { payload }: PayloadAction<Shift[]>) => {
+    setAllShifts: (_state, { payload }: PayloadAction<Shift[]>) => {
       return groupAndSortByDate(payload);
     },
 
@@ -26,31 +26,38 @@ const shiftsSlice = createSlice({
   },
 });
 
-export const { setAllByDate, clearAll } = shiftsSlice.actions;
+export const { setAllShifts, clearAll } = shiftsSlice.actions;
 
 export const selectByDate = (root: RootState) => root.shifts as ByDateState;
-const byStartTime = (a: Shift, b: Shift) => a.start.localeCompare(b.start);
 
-export const makeSelectMonthGrid = (year: number, month: number) =>
-  createSelector(selectByDate, (shifts) => {
-    const start = startOfMonth(new Date(year, month, 1));
+export const makeSelectMonthRows = (year: number, month0: number) =>
+  createSelector(selectByDate, (byDate) => {
+    const start = startOfMonth(new Date(year, month0 - 1, 1));
     const end = endOfMonth(start);
     const daysISO = eachDayOfInterval({ start, end }).map((d) =>
       format(d, "yyyy-MM-dd")
     );
 
-    const days = daysISO.map((dayISO) => ({
-      id: dayISO,
-      day: dayISO,
-      shifts: (shifts[dayISO] ?? []).slice().sort(byStartTime),
-    }));
+    const quantity =
+      daysISO.reduce(
+        (m, dateISO) => Math.max(m, byDate[dateISO]?.length ?? 0),
+        0
+      ) || 1;
 
-    const maxPerDay = days.reduce((m, d) => Math.max(m, d.shifts.length), 0);
+    const rows = daysISO.map<DayRow>((dateISO) => {
+      const weekday = format(new Date(dateISO), "EEE") as Weekday;
+      const shifts = (byDate[dateISO] ?? []).slice(0);
+      const flat: Partial<DayRow> = { id: dateISO, dateISO, weekday };
+      shifts.forEach((s, i) => {
+        flat[`s${i}_start` as const] = s.start ?? "";
+        flat[`s${i}_end` as const] = s.end ?? "";
+        flat[`s${i}_employeeId` as const] = s.employeeId ?? "";
+      });
+      return flat as DayRow;
+    });
 
-    return {
-      quantity: maxPerDay + 1,
-      days,
-    };
+    return { rows, quantity };
   });
+
 export { shiftsSlice };
 export default shiftsSlice.reducer;

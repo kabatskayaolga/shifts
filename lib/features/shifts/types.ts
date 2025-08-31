@@ -8,13 +8,23 @@ export type Shift = {
 
 export type ByDateState = Record<string, Shift[]>;
 
-export type Days = {
-  id: string;
-  day: string;
-  shifts: Shift[];
-};
+export type Weekday =
+  | "Monday"
+  | "Tuesday"
+  | "Wednesday"
+  | "Thursday"
+  | "Friday"
+  | "Saturday"
+  | "Sunday";
 
-export type MakeSelectMonthGrid = {
-  quontity: number;
-  days: Days[];
+export type DayRow = {
+  id: string;
+  dateISO: string;
+  weekday: Weekday;
+} & {
+  [K in `s${number}_start`]?: string;
+} & {
+  [K in `s${number}_end`]?: string;
+} & {
+  [K in `s${number}_employeeId`]?: string;
 };
