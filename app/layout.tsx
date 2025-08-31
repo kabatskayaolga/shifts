@@ -42,11 +42,11 @@ export default function RootLayout({
                 <Header />
                 <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
                   <Image
-                    className="dark:invert dark:brightness-0 dark:contrast-100"
+                    className="dark:invert dark:brightness-0 dark:contrast-100 w-80 h-24"
                     src="/logo.svg"
                     alt="Doppentsolecker logo"
-                    width={300}
-                    height={100}
+                    width={320}
+                    height={96}
                     priority
                   />
                   {children}
