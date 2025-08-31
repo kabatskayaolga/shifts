@@ -1,4 +1,6 @@
-export const demoSettings = {
+import { Settings } from "@/lib/features/settings/types";
+
+export const demoSettings: Settings = {
   businessHours: {
     Monday: { start: "08:30", end: "22:00" },
     Tuesday: null,
