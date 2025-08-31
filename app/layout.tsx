@@ -3,8 +3,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "./StoreProvider";
-import theme from "./theme";
+import Footer from "@/components/layout/footer";
+import Image from "next/image";
+import Header from "@/components/layout/header";
 import { ThemeProvider } from "@mui/material";
+import theme from "./theme";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +37,23 @@ export default function RootLayout({
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+            <ThemeProvider theme={theme}>
+              <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+                <Header />
+                <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+                  <Image
+                    className="dark:invert dark:brightness-0 dark:contrast-100"
+                    src="/logo.svg"
+                    alt="Doppentsolecker logo"
+                    width={300}
+                    height={100}
+                    priority
+                  />
+                  {children}
+                </main>
+                <Footer />
+              </div>
+            </ThemeProvider>
           </AppRouterCacheProvider>
         </body>
       </html>
