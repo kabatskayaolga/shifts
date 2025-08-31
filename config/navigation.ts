@@ -34,4 +34,19 @@ const footerLinks: Link[] = [
   },
 ];
 
-export { footerLinks };
+const headerLinks: Link[] = [
+  {
+    href: "/",
+    title: "Dienstpläne",
+  },
+  {
+    href: "/employees",
+    title: "Mitarbeiter*innen",
+  },
+  {
+    href: "/settings",
+    title: "Einstellüngen",
+  },
+];
+
+export { footerLinks, headerLinks };
