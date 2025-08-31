@@ -4,7 +4,7 @@ import Image from "next/image";
 const Link = ({ link: { href, title, img, target } }: { link: LinkType }) => {
   return (
     <a
-      className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+      className="flex items-center gap-2 hover:underline hover:underline-offset-4 dark:invert dark:brightness-0 dark:contrast-100"
       href={href}
       target={target}
       rel="noopener noreferrer"
