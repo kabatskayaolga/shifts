@@ -1,8 +1,11 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineSlices, configureStore } from "@reduxjs/toolkit";
+import { shiftsSlice } from "./features/shifts/shiftsSlice";
+
+const rootReducer = combineSlices(shiftsSlice);
 
 export const makeStore = () => {
   return configureStore({
-    reducer: {},
+    reducer: rootReducer,
   });
 };
 
