@@ -1,0 +1,40 @@
+"use client";
+
+import * as React from "react";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useEffect, useState } from "react";
+import { columns } from "./columns";
+
+import {
+  selectBusinessHoursArray,
+  selectWeekSlots,
+  setAllBySettings,
+} from "@/lib/features/settings/settingsSlice";
+
+import { fetchSettings } from "@/services/settings";
+
+import DataGrid from "@/components/ui/DataGrid";
+import { Box, LinearProgress } from "@mui/material";
+
+export default function BusinessHours() {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const businessHours = useAppSelector(selectBusinessHoursArray);
+  const slots = useAppSelector(selectWeekSlots);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    fetchSettings().then((v) => {
+      dispatch(setAllBySettings(v));
+      setIsLoaded(true);
+    });
+  }, [dispatch]);
+
+  if (!isLoaded)
+    return (
+      <Box sx={{ width: "100%" }}>
+        <LinearProgress />
+      </Box>
+    );
+
+  return <DataGrid rows={businessHours} columns={columns(slots)} />;
+}
