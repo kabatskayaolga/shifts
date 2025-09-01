@@ -57,7 +57,11 @@ const Schifts = () => {
         <LinearProgress />
       </Box>
     );
-  return <DataGrid columns={columns} rows={rows} />;
+  return (
+    <Box sx={{ width: "100%", maxWidth: "800px" }}>
+      <DataGrid columns={columns} rows={rows} />
+    </Box>
+  );
 };
 
 export default Schifts;
