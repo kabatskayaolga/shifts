@@ -57,5 +57,9 @@ export default function Employees() {
       </Box>
     );
 
-  return <DataGrid rows={employees} columns={cols} />;
+  return (
+    <Box sx={{ width: "100%", maxWidth: "400px" }}>
+      <DataGrid rows={employees} columns={cols} />
+    </Box>
+  );
 }

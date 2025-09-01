@@ -5,10 +5,10 @@ import BusinessHours from "../components/businessHours/BusinessHours";
 
 export default function IndexPage() {
   return (
-    <>
+    <div className="flex flex-col gap-8 w-full items-center">
       <h1 className="text-3xl sm:text-4xl md:text-6xl">Einstellüngen</h1>
       <BusinessHours />
-    </>
+    </div>
   );
 }
 

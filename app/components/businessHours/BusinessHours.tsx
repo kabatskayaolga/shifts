@@ -36,5 +36,9 @@ export default function BusinessHours() {
       </Box>
     );
 
-  return <DataGrid rows={businessHours} columns={columns(slots)} />;
+  return (
+    <Box sx={{ width: "100%", maxWidth: "400px" }}>
+      <DataGrid rows={businessHours} columns={columns(slots)} />
+    </Box>
+  );
 }
