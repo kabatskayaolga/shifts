@@ -15,7 +15,7 @@ Das Projekt ist aktuell **noch in Entwicklung**.
 - 📅 **Monatsübersicht** – Alle Schichten pro Tag im Kalenderraster
 - 🧑‍🤝‍🧑 **Mitarbeiterverwaltung** _(in Entwicklung)_ – Hinzufügen, Bearbeiten und Löschen von Mitarbeitern wird bald verfügbar sein
 - ⏱️ **Schichtplanung** – Zuweisung von Start- und Endzeiten sowie Mitarbeitern pro Schicht
-- 🎨 **Dark-/Light-Mode** – Umschaltbar dank **TailwindCSS** und **next-themes**
+- 🎨 **Dark-/Light-Mode** – Umschaltbar dank **TailwindCSS** und **Material UI**
 - ⚡ **Demo-Daten** – Beispiel-Mitarbeiter und Schichten für Testzwecke
 - 📦 **State Management** – Vollständig integriert mit **Redux Toolkit**
 - 🛠️ **Material UI DataGrid** – Tabellenansicht mit Editierbarkeit
@@ -33,7 +33,6 @@ Das Projekt ist aktuell **noch in Entwicklung**.
 | **TailwindCSS v4** | Styling und Dark-/Light-Mode       |
 | **TypeScript**     | Typsicherheit                      |
 | **date-fns**       | Datumshandling                     |
-| **next-themes**    | Dynamischer Dark-/Light-Mode       |
 
 ---
 
