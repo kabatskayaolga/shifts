@@ -1,6 +1,6 @@
 "use client";
 import { DataGrid as MuiDataGrid, GridValidRowModel } from "@mui/x-data-grid";
-import { Box } from "@mui/material";
+
 import React from "react";
 
 type Props<T extends GridValidRowModel> = React.ComponentProps<
@@ -9,22 +9,22 @@ type Props<T extends GridValidRowModel> = React.ComponentProps<
 
 export default function DataGrid<T extends GridValidRowModel>(props: Props<T>) {
   return (
-    <Box sx={{ width: "100%", height: "100%" }}>
-      <MuiDataGrid
-        className=" w-full"
-        {...props}
-        rowHeight={34}
-        disableColumnFilter
-        hideFooter
-        sx={{
-          border: 0,
-          backgroundColor: "var(--background)",
-          "& .MuiDataGrid-columnHeader,  & .MuiDataGrid-columnHeaders .MuiDataGrid-filler, & .MuiDataGrid-columnHeaders .MuiDataGrid-scrollbarFiller":
-            {
-              background: "var(--background)",
-            },
-        }}
-      />
-    </Box>
+    <MuiDataGrid
+      className=" w-full"
+      {...props}
+      rowHeight={34}
+      disableColumnFilter
+      disableColumnMenu
+      disableColumnResize
+      hideFooter
+      sx={{
+        border: 0,
+        backgroundColor: "var(--background)",
+        "& .MuiDataGrid-columnHeader,  & .MuiDataGrid-columnHeaders .MuiDataGrid-filler, & .MuiDataGrid-columnHeaders .MuiDataGrid-scrollbarFiller":
+          {
+            background: "var(--background)",
+          },
+      }}
+    />
   );
 }
