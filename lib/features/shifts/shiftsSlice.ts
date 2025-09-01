@@ -2,6 +2,7 @@ import { RootState } from "@/lib/store";
 import { createSlice, PayloadAction, createSelector } from "@reduxjs/toolkit";
 import { format, startOfMonth, endOfMonth, eachDayOfInterval } from "date-fns";
 import { ByDateState, DayRow, Shift, Weekday } from "./types";
+import { durationMin } from "@/utils/time";
 
 const initialState: ByDateState = {};
 
@@ -59,5 +60,19 @@ export const makeSelectMonthRows = (year: number, month0: number) =>
     return { rows, quantity };
   });
 
+export const makeSelectMonthlyWorkByEmployee = (year: number, month0: number) =>
+  createSelector(selectByDate, (byDate) => {
+    const ym = `${year}-${String(month0).padStart(2, "0")}`;
+    const acc: Record<string, number> = {};
+
+    for (const [dateISO, shifts] of Object.entries(byDate)) {
+      if (!dateISO.startsWith(ym)) continue;
+      for (const sh of shifts) {
+        const mins = durationMin(sh.start, sh.end);
+        acc[sh.employeeId] = (acc[sh.employeeId] ?? 0) + mins;
+      }
+    }
+    return acc;
+  });
 export { shiftsSlice };
 export default shiftsSlice.reducer;
