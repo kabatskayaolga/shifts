@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import Employees from "../components/employees/Employees";
-import { Typography } from "@mui/material";
 
 export default function IndexPage() {
   return (
     <>
-      <Typography variant="h1">Mitarbeiter*innen</Typography>
+      <h1 className="text-3xl sm:text-4xl md:text-6xl">Mitarbeiter*innen</h1>
       <Employees />
     </>
   );
