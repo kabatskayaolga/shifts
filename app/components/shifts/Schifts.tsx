@@ -23,6 +23,7 @@ import {
 import { fetchEmployees } from "@/services/employees";
 import { fetchSettings } from "@/services/settings";
 import { Box } from "@mui/material";
+import { columnGroupingModel } from "./columnsGroup";
 
 const Schifts = () => {
   const [month] = useState(9);
@@ -54,7 +55,11 @@ const Schifts = () => {
   if (!isLoaded) return;
   return (
     <Box sx={{ width: "100%", maxWidth: "800px" }}>
-      <DataGrid columns={columns} rows={rows} />
+      <DataGrid
+        columns={columns}
+        rows={rows}
+        columnGroupingModel={columnGroupingModel(quantity)}
+      />
     </Box>
   );
 };
