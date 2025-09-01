@@ -14,7 +14,7 @@ import {
 import { fetchSettings } from "@/services/settings";
 
 import DataGrid from "@/components/ui/DataGrid";
-import { Box, LinearProgress } from "@mui/material";
+import { Box } from "@mui/material";
 
 export default function BusinessHours() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -29,12 +29,7 @@ export default function BusinessHours() {
     });
   }, [dispatch]);
 
-  if (!isLoaded)
-    return (
-      <Box sx={{ width: "100%" }}>
-        <LinearProgress />
-      </Box>
-    );
+  if (!isLoaded) return;
 
   return (
     <Box sx={{ width: "100%", maxWidth: "400px" }}>

@@ -51,12 +51,7 @@ const Schifts = () => {
     () => buildColumns(quantity, { employees, slots }),
     [quantity, employees, slots]
   );
-  if (!isLoaded)
-    return (
-      <Box sx={{ width: "100%" }}>
-        <LinearProgress />
-      </Box>
-    );
+  if (!isLoaded) return;
   return (
     <Box sx={{ width: "100%", maxWidth: "800px" }}>
       <DataGrid columns={columns} rows={rows} />

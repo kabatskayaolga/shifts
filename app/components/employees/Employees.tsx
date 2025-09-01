@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useEffect, useMemo, useState } from "react";
 import { columns as buildColumns } from "./columns";
 import DataGrid from "@/components/ui/DataGrid";
-import { Box, LinearProgress } from "@mui/material";
+import { Box } from "@mui/material";
 import {
   selectAllEmployees,
   setAllByEmployees,
@@ -50,15 +50,10 @@ export default function Employees() {
     ]).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  if (!isLoaded)
-    return (
-      <Box sx={{ width: "100%" }}>
-        <LinearProgress />
-      </Box>
-    );
+  if (!isLoaded) return;
 
   return (
-    <Box sx={{ width: "100%", maxWidth: "400px" }}>
+    <Box sx={{ width: "100%", maxWidth: "430px" }}>
       <DataGrid rows={employees} columns={cols} />
     </Box>
   );
