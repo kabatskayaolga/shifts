@@ -6,10 +6,7 @@ import StoreProvider from "./StoreProvider";
 import Footer from "@/components/layout/footer";
 
 import Header from "@/components/layout/header";
-import {
-  getInitColorSchemeScript,
-  ThemeProvider as ThemeProviderUI,
-} from "@mui/material";
+import { ThemeProvider as ThemeProviderUI } from "@mui/material";
 import theme from "./theme";
 import { ThemeProvider as ThemeProviderTheme } from "next-themes";
 
@@ -37,7 +34,6 @@ export default function RootLayout({
   return (
     <StoreProvider>
       <html lang="de" suppressHydrationWarning>
-        <head>{getInitColorSchemeScript({ defaultMode: "system" })}</head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
