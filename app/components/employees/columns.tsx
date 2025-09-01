@@ -22,7 +22,7 @@ export const columns: Columns = (contracts, totalsByEmp) => {
     {
       field: "contract",
       headerName: "Vertrag",
-      width: 180,
+      width: 120,
       editable: true,
       type: "singleSelect",
       valueOptions: contracts.map((e) => e),
