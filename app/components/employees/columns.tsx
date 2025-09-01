@@ -34,7 +34,7 @@ export const columns: Columns = (contracts, totalsByEmp) => {
       width: 160,
       cellClassName: ({ value, row }) => {
         const limit = contractMap.get(row.contract)?.maxMinutesPerMonth;
-        if (limit && Number(value) > limit) return "bg-Alert-errorFilled";
+        if (limit && Number(value) > limit) return " bg-rose-500 text-white";
         return "";
       },
       valueGetter: (_, row) => {
