@@ -1,4 +1,4 @@
-import Schifts from "./shifts/Schifts";
+import Schifts from "./components/shifts/Schifts";
 
 export default function Home() {
   return (
