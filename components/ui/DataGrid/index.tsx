@@ -19,6 +19,10 @@ export default function DataGrid<T extends GridValidRowModel>(props: Props<T>) {
         sx={{
           border: 0,
           backgroundColor: "var(--background)",
+          "& .MuiDataGrid-columnHeader,  & .MuiDataGrid-columnHeaders .MuiDataGrid-filler, & .MuiDataGrid-columnHeaders .MuiDataGrid-scrollbarFiller":
+            {
+              background: "var(--background)",
+            },
         }}
       />
     </Box>
