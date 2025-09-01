@@ -22,10 +22,12 @@ import {
 
 import { fetchEmployees } from "@/services/employees";
 import { fetchSettings } from "@/services/settings";
+import { Box, LinearProgress } from "@mui/material";
 
 const Schifts = () => {
   const [month] = useState(9);
   const [year] = useState(2025);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const selectMonth = useMemo(
     () => makeSelectMonthRows(year, month),
@@ -38,16 +40,23 @@ const Schifts = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    fetchShifts().then((v) => dispatch(setAllShifts(v)));
-    fetchEmployees().then((v) => dispatch(setAllByEmployees(v)));
-    fetchSettings().then((v) => dispatch(setAllBySettings(v)));
+    Promise.all([
+      fetchShifts().then((v) => dispatch(setAllShifts(v))),
+      fetchEmployees().then((v) => dispatch(setAllByEmployees(v))),
+      fetchSettings().then((v) => dispatch(setAllBySettings(v))),
+    ]).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   const columns = useMemo(
     () => buildColumns(quantity, { employees, slots }),
     [quantity, employees, slots]
   );
-
+  if (!isLoaded)
+    return (
+      <Box sx={{ width: "100%" }}>
+        <LinearProgress />
+      </Box>
+    );
   return <DataGrid columns={columns} rows={rows} />;
 };
 
