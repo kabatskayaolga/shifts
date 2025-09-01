@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import BusinessHours from "../components/businessHours/BusinessHours";
+import { Typography } from "@mui/material";
 
 // import Schifts from "./components/shifts/Schifts";
 
 export default function IndexPage() {
   return (
     <>
-      <h1 className=" typography-h3">Einstellüngen</h1>
+      <Typography variant="h1">Einstellüngen</Typography>
       <BusinessHours />
     </>
   );

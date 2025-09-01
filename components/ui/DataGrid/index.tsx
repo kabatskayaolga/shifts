@@ -17,13 +17,22 @@ const getTheme = () =>
             backgroundColor: "var(--background)",
             color: "var(--foreground)",
             border: "none",
+            "--DataGrid-bgcolor": "var(--background)",
+            "--DataGrid-headerBackground": "var(--background)",
+            "--DataGrid-pinnedBackground": "var(--background)",
+
             "& .MuiDataGrid-cell": {
               borderBottom: "none",
             },
             "& .MuiDataGrid-columnHeaders": {
               borderBottom: "none",
+              backgroundColor: "var(--background)",
+            },
+            "& .MuiDataGrid-filler": {
+              backgroundColor: "var(--background)",
             },
             "& .MuiDataGrid-withBorderColor": {
+              backgroundColor: "var(--background)",
               borderColor: "transparent",
             },
           },
