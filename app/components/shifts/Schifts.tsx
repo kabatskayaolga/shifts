@@ -22,7 +22,7 @@ import {
 
 import { fetchEmployees } from "@/services/employees";
 import { fetchSettings } from "@/services/settings";
-import { Box, LinearProgress } from "@mui/material";
+import { Box } from "@mui/material";
 
 const Schifts = () => {
   const [month] = useState(9);
