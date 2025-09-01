@@ -7,6 +7,11 @@ export type Weekday =
   | "Saturday"
   | "Sunday";
 
+export type Contract = Record<
+  string,
+  { label: string; maxMinutesPerMonth: number }
+>;
+
 export type Settings = {
   businessHours: Record<Weekday, { start: string; end: string } | null>;
   slotStepMinutes: number;
@@ -14,7 +19,7 @@ export type Settings = {
     minShiftMinutes: number;
     maxShiftMinutes: number;
   };
-  contracts: Record<string, { label: string; maxMinutesPerMonth: number }>;
+  contracts: Contract;
   holidays: string[];
 };
 
@@ -23,4 +28,10 @@ export type BusinessDay = {
   day: string;
   start?: string;
   end?: string;
+};
+
+export type ContractOption = {
+  value: string;
+  label: string;
+  maxMinutesPerMonth: number;
 };

@@ -1,6 +1,7 @@
 import { RootState } from "@/lib/store";
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { BusinessDay, Settings, Weekday } from "./types";
+import { BusinessDay, ContractOption, Settings, Weekday } from "./types";
+import { toMinutes, toHHMM } from "@/utils/time";
 
 const initialState: Settings = {
   businessHours: {
@@ -41,6 +42,21 @@ export const selectSettings = (s: RootState) => s.settings;
 export const selectBusinessHours = (s: RootState) => s.settings.businessHours;
 export const selectSlotStep = (s: RootState) => s.settings.slotStepMinutes;
 export const selectHolidays = (s: RootState) => s.settings.holidays;
+export const selectContacts = (s: RootState) => s.settings.contracts;
+
+export const selectContactsInfo = createSelector([selectContacts], (c) => {
+  const optionValues: ContractOption[] = [];
+  const contracts = Object.keys(c);
+
+  contracts.map((t) => {
+    optionValues.push({
+      value: t,
+      label: c[t].label,
+      maxMinutesPerMonth: c[t].maxMinutesPerMonth,
+    });
+  });
+  return optionValues;
+});
 
 const deDayLabel: Record<Weekday, string> = {
   Monday: "Montag",
@@ -78,16 +94,6 @@ export const selectBusinessHoursArray = createSelector(
     });
   }
 );
-
-const toMinutes = (hhmm: string) => {
-  const [h, m] = hhmm.split(":").map(Number);
-  return h * 60 + m;
-};
-const toHHMM = (min: number) => {
-  const h = String(Math.floor(min / 60)).padStart(2, "0");
-  const m = String(min % 60).padStart(2, "0");
-  return `${h}:${m}`;
-};
 
 export const selectWeekSlots = createSelector(
   [selectBusinessHours, selectSlotStep],
