@@ -9,7 +9,13 @@ type Props<T extends GridValidRowModel> = React.ComponentProps<
 export default function DataGrid<T extends GridValidRowModel>(props: Props<T>) {
   return (
     <Box sx={{ width: "100%", height: "100%" }}>
-      <MuiDataGrid className=" w-full" {...props} rowHeight={34} />
+      <MuiDataGrid
+        className=" w-full"
+        {...props}
+        rowHeight={34}
+        disableColumnFilter
+        hideFooter
+      />
     </Box>
   );
 }
