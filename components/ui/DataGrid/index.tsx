@@ -19,41 +19,6 @@ export default function DataGrid<T extends GridValidRowModel>(props: Props<T>) {
         sx={{
           border: 0,
           backgroundColor: "var(--background)",
-          color: "var(--foreground)",
-          "& .MuiDataGrid-columnHeaders .MuiDataGrid-filler": {
-            backgroundColor: "var(--background)",
-          },
-          "& .MuiDataGrid-columnHeader": {
-            backgroundColor: "var(--background)",
-            color: "var(--background)",
-            // "&:hover": {
-            //   backgroundColor: "#1e1e1e",
-            //   cursor: "pointer",
-            // },
-            "& .MuiDataGrid-filler": {
-              backgroundColor: "#d0d0d021",
-            },
-            "& .MuiDataGrid-scrollbarFiller": {
-              backgroundColor: "var(--background)",
-            },
-          },
-          "& .MuiDataGrid-row": {
-            "--rowBorderColor": "#d0d0d021",
-            "&:hover": { backgroundColor: "#d0d0d021" },
-          },
-          "& .MuiDataGrid-row.Mui-selected": {
-            backgroundColor: "#d0d0d021",
-            "&:hover": { backgroundColor: "#d0d0d021" },
-          },
-
-          "& .MuiDataGrid-pinnedColumnHeaders": {
-            backgroundColor: "var(--background)",
-            color: "var(--foreground)",
-          },
-          "& .MuiDataGrid-columnHeaderTitle": {
-            color: "var(--foreground)",
-            fontWeight: 600,
-          },
         }}
       />
     </Box>

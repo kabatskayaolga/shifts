@@ -6,9 +6,12 @@ import StoreProvider from "./StoreProvider";
 import Footer from "@/components/layout/footer";
 
 import Header from "@/components/layout/header";
-import { ThemeProvider as ThemeProviderUI } from "@mui/material";
+import {
+  CssBaseline,
+  InitColorSchemeScript,
+  ThemeProvider as ThemeProviderUI,
+} from "@mui/material";
 import theme from "./theme";
-import { ThemeProvider as ThemeProviderTheme } from "next-themes";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,24 +40,19 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <ThemeProviderTheme
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-              <ThemeProviderUI theme={theme}>
-                <div className="font-sans grid grid-rows-auto items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-                  <Header />
-                  <main className="flex flex-col gap-[32px] row-start-2  w-full min-w-0 place-self-stretch sm:items-start">
-                    {children}
-                  </main>
-                  <Footer />
-                </div>
-              </ThemeProviderUI>
-            </AppRouterCacheProvider>
-          </ThemeProviderTheme>
+          <InitColorSchemeScript attribute="class" />
+          <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+            <ThemeProviderUI theme={theme}>
+              <CssBaseline />
+              <div className="font-sans grid grid-rows-auto items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+                <Header />
+                <main className="flex flex-col gap-[32px] row-start-2  w-full min-w-0 place-self-stretch sm:items-start">
+                  {children}
+                </main>
+                <Footer />
+              </div>
+            </ThemeProviderUI>
+          </AppRouterCacheProvider>
         </body>
       </html>
     </StoreProvider>

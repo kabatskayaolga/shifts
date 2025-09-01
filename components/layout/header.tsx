@@ -4,12 +4,14 @@ import { headerLinks } from "@/config/navigation";
 import Link from "../ui/Link";
 import Image from "next/image";
 import { FormControlLabel, Switch } from "@mui/material";
-import { useTheme } from "next-themes";
+import { useColorScheme } from "@mui/material/styles";
 
 import image from "@/public/logo.svg";
 const Header = () => {
-  const { theme, setTheme } = useTheme();
-
+  const { mode, setMode } = useColorScheme();
+  if (!mode) {
+    return null;
+  }
   return (
     <header className="row-start-1 flex gap-[24px] flex-wrap items-center justify-center w-full sm:justify-between md:justify-between">
       <Image
@@ -26,7 +28,7 @@ const Header = () => {
         ))}
       </div>
       <FormControlLabel
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        onClick={() => setMode(mode === "dark" ? "light" : "dark")}
         control={<Switch defaultChecked />}
         label="Mode"
       />
