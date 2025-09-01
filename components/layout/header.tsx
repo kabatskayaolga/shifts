@@ -3,15 +3,10 @@
 import { headerLinks } from "@/config/navigation";
 import Link from "../ui/Link";
 import Image from "next/image";
-import { FormControlLabel, Switch } from "@mui/material";
-import { useColorScheme } from "@mui/material/styles";
-
 import image from "@/public/logo.svg";
+import ModeSwitch from "../ui/modeSwitch";
+
 const Header = () => {
-  const { mode, setMode } = useColorScheme();
-  if (!mode) {
-    return null;
-  }
   return (
     <header className="row-start-1 flex gap-4 flex-wrap items-center justify-center w-full  xl:justify-between">
       <Image
@@ -27,12 +22,9 @@ const Header = () => {
           <Link key={k} link={l} />
         ))}
       </div>
-      <FormControlLabel
-        className="w-80 flex justify-center"
-        onClick={() => setMode(mode === "dark" ? "light" : "dark")}
-        control={<Switch defaultChecked />}
-        label="Mode"
-      />
+      <div className="w-80 flex justify-center">
+        <ModeSwitch />
+      </div>
     </header>
   );
 };
