@@ -1,6 +1,6 @@
 "use client";
 
-import DataGrid from "@/components/ui/DataGrid";
+import DataGrid from "@/components/ui/dataGrid";
 import { buildColumns } from "./columns";
 import { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";

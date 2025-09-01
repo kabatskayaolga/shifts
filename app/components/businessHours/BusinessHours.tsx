@@ -13,7 +13,7 @@ import {
 
 import { fetchSettings } from "@/services/settings";
 
-import DataGrid from "@/components/ui/DataGrid";
+import DataGrid from "@/components/ui/dataGrid";
 import { Box } from "@mui/material";
 
 export default function BusinessHours() {

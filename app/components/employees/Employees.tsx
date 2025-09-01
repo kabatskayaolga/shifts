@@ -4,7 +4,7 @@ import * as React from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useEffect, useMemo, useState } from "react";
 import { columns as buildColumns } from "./columns";
-import DataGrid from "@/components/ui/DataGrid";
+import DataGrid from "@/components/ui/dataGrid";
 import { Box } from "@mui/material";
 import {
   selectAllEmployees,
