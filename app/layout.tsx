@@ -6,8 +6,9 @@ import StoreProvider from "./StoreProvider";
 import Footer from "@/components/layout/footer";
 
 import Header from "@/components/layout/header";
-import { ThemeProvider } from "@mui/material";
+import { ThemeProvider as ThemeProviderUI } from "@mui/material";
 import theme from "./theme";
+import { ThemeProvider as ThemeProviderTheme } from "next-themes";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,21 +33,28 @@ export default function RootLayout({
 }>) {
   return (
     <StoreProvider>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="de" suppressHydrationWarning>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <AppRouterCacheProvider options={{ enableCssLayer: true }}>
-            <ThemeProvider theme={theme}>
-              <div className="font-sans grid grid-rows-auto items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-                <Header />
-                <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-                  {children}
-                </main>
-                <Footer />
-              </div>
-            </ThemeProvider>
-          </AppRouterCacheProvider>
+          <ThemeProviderTheme
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+              <ThemeProviderUI theme={theme}>
+                <div className="font-sans grid grid-rows-auto items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+                  <Header />
+                  <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+                    {children}
+                  </main>
+                  <Footer />
+                </div>
+              </ThemeProviderUI>
+            </AppRouterCacheProvider>
+          </ThemeProviderTheme>
         </body>
       </html>
     </StoreProvider>
