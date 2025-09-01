@@ -22,6 +22,8 @@ export type DayRow = {
   dateISO: string;
   weekday: Weekday;
 } & {
+  [K in `s${number}_id`]?: string;
+} & {
   [K in `s${number}_start`]?: string;
 } & {
   [K in `s${number}_end`]?: string;

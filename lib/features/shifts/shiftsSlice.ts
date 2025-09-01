@@ -20,6 +20,14 @@ const shiftsSlice = createSlice({
     setAllShifts: (_state, { payload }: PayloadAction<Shift[]>) => {
       return groupAndSortByDate(payload);
     },
+    setDay: (
+      state,
+      { payload }: PayloadAction<{ date: string; shifts: Shift[] }>
+    ) => {
+      state[payload.date] = [...payload.shifts].sort((a, b) =>
+        a.start.localeCompare(b.start)
+      );
+    },
 
     clearAll: () => {
       return {};
@@ -27,7 +35,7 @@ const shiftsSlice = createSlice({
   },
 });
 
-export const { setAllShifts, clearAll } = shiftsSlice.actions;
+export const { setAllShifts, setDay, clearAll } = shiftsSlice.actions;
 
 export const selectByDate = (root: RootState) => root.shifts as ByDateState;
 
@@ -44,19 +52,35 @@ export const makeSelectMonthRows = (year: number, month0: number) =>
         (m, dateISO) => Math.max(m, byDate[dateISO]?.length ?? 0),
         0
       ) || 1;
-
     const rows = daysISO.map<DayRow>((dateISO) => {
       const weekday = format(new Date(dateISO), "EEE") as Weekday;
       const shifts = (byDate[dateISO] ?? []).slice(0);
-      const flat: Partial<DayRow> = { id: dateISO, dateISO, weekday };
+
+      const shiftsRow = Array.from({ length: quantity }).reduce<
+        Record<string, string>
+      >((acc, _, i) => {
+        acc[`s${i}_id`] = crypto.randomUUID();
+        acc[`s${i}_start`] = "";
+        acc[`s${i}_end`] = "";
+        acc[`s${i}_employeeId`] = "";
+        return acc;
+      }, {});
+
+      const flat: Partial<DayRow> = {
+        id: dateISO,
+        dateISO,
+        weekday,
+        ...shiftsRow,
+      };
+
       shifts.forEach((s, i) => {
+        flat[`s${i}_id` as const] = s.id ?? "";
         flat[`s${i}_start` as const] = s.start ?? "";
         flat[`s${i}_end` as const] = s.end ?? "";
         flat[`s${i}_employeeId` as const] = s.employeeId ?? "";
       });
       return flat as DayRow;
     });
-
     return { rows, quantity };
   });
 
