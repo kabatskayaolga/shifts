@@ -1,9 +1,14 @@
+"use client";
+
 import { headerLinks } from "@/config/navigation";
 import Link from "../ui/Link";
 import Image from "next/image";
 import { FormControlLabel, Switch } from "@mui/material";
+import { useTheme } from "next-themes";
 
 const Header = () => {
+  const { theme, setTheme } = useTheme();
+
   return (
     <header className="row-start-1 flex gap-[24px] flex-wrap items-center justify-center w-full sm:justify-between md:justify-between">
       <Image
@@ -19,7 +24,11 @@ const Header = () => {
           <Link key={k} link={l} />
         ))}
       </div>
-      <FormControlLabel control={<Switch defaultChecked />} label="Mode" />
+      <FormControlLabel
+        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        control={<Switch defaultChecked />}
+        label="Mode"
+      />
     </header>
   );
 };
