@@ -5,9 +5,9 @@ import { FormControlLabel, Switch } from "@mui/material";
 
 const Header = () => {
   return (
-    <header className="row-start-1 flex gap-[24px] flex-wrap items-center justify-between w-full">
+    <header className="row-start-1 flex gap-[24px] flex-wrap items-center justify-center w-full sm:justify-between md:justify-between">
       <Image
-        className="dark:invert dark:brightness-0 dark:contrast-100 w-60 h-8"
+        className="dark:invert dark:brightness-0 dark:contrast-100 w-80 h-12"
         src="/logo.svg"
         alt="Doppentsolecker logo"
         width={240}
