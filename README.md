@@ -2,6 +2,11 @@
 
 Eine moderne Webanwendung zur einfachen Verwaltung von **Mitarbeiterschichten** mit **Monatsübersicht**.  
 Gebaut mit **Next.js 15**, **Redux Toolkit**, **Material UI**, **TailwindCSS** und **TypeScript**.
+Das Projekt ist aktuell **noch in Entwicklung**.
+
+## 🔗 Demo
+
+[Live-Demo ansehen →](https://kabatskayaolga.github.io/shifts)
 
 ---
 
