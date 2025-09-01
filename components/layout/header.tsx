@@ -13,7 +13,7 @@ const Header = () => {
     return null;
   }
   return (
-    <header className="row-start-1 flex gap-[24px] flex-wrap items-center justify-center w-full sm:justify-between md:justify-between">
+    <header className="row-start-1 flex gap-4 flex-wrap items-center justify-center w-full  xl:justify-between">
       <Image
         className="dark:invert dark:brightness-0 dark:contrast-100 w-80 h-12"
         src={image}
@@ -28,6 +28,7 @@ const Header = () => {
         ))}
       </div>
       <FormControlLabel
+        className="w-80 flex justify-center"
         onClick={() => setMode(mode === "dark" ? "light" : "dark")}
         control={<Switch defaultChecked />}
         label="Mode"
