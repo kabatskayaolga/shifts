@@ -65,7 +65,7 @@ const weekdays: Weekday[] = [
 export const selectBusinessHoursArray = createSelector(
   [selectBusinessHours],
   (bh) => {
-    weekdays.map<BusinessDay>((wd) => {
+    return weekdays.map<BusinessDay>((wd) => {
       const interval = bh[wd];
       return interval
         ? {
