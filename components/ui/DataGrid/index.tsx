@@ -28,9 +28,7 @@ const getTheme = () =>
               borderBottom: "none",
               backgroundColor: "var(--background)",
             },
-            "& .MuiDataGrid-filler": {
-              backgroundColor: "var(--background)",
-            },
+
             "& .MuiDataGrid-withBorderColor": {
               backgroundColor: "var(--background)",
               borderColor: "transparent",

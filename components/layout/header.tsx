@@ -6,6 +6,7 @@ import Image from "next/image";
 import { FormControlLabel, Switch } from "@mui/material";
 import { useTheme } from "next-themes";
 
+import image from "@/public/logo.svg";
 const Header = () => {
   const { theme, setTheme } = useTheme();
 
@@ -13,7 +14,7 @@ const Header = () => {
     <header className="row-start-1 flex gap-[24px] flex-wrap items-center justify-center w-full sm:justify-between md:justify-between">
       <Image
         className="dark:invert dark:brightness-0 dark:contrast-100 w-80 h-12"
-        src="/logo.svg"
+        src={image}
         alt="Doppentsolecker logo"
         width={240}
         height={32}
