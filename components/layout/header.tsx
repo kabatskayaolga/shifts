@@ -14,7 +14,7 @@ const Header = () => {
         height={32}
         priority
       />
-      <div className="flex gap-6 flex-wrap">
+      <div className="flex gap-6 flex-wrap justify-center">
         {headerLinks.map((l, k) => (
           <Link key={k} link={l} />
         ))}
