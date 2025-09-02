@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import {
   makeSelectMonthRows,
   setAllShifts,
+  setDay,
 } from "@/lib/features/shifts/shiftsSlice";
 import { fetchShifts } from "@/services/shifts";
 
@@ -22,13 +23,18 @@ import {
 
 import { fetchEmployees } from "@/services/employees";
 import { fetchSettings } from "@/services/settings";
-import { Box } from "@mui/material";
+import { Alert, AlertColor, Box, Snackbar } from "@mui/material";
 import { columnGroupingModel } from "./columnsGroup";
+import { rowToShifts, validateRow } from "@/utils/data";
 
 const Schifts = () => {
   const [month] = useState(9);
   const [year] = useState(2025);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const [error, setError] = useState<
+    { type: AlertColor; text: string } | undefined
+  >(undefined);
 
   const selectMonth = useMemo(
     () => makeSelectMonthRows(year, month),
@@ -55,10 +61,36 @@ const Schifts = () => {
   if (!isLoaded) return;
   return (
     <Box sx={{ width: "100%", maxWidth: "800px" }}>
+      {error && (
+        <Snackbar
+          open={!!error}
+          autoHideDuration={6000}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        >
+          <Alert severity={error.type} variant="filled" sx={{ width: "100%" }}>
+            {error.text}
+          </Alert>
+        </Snackbar>
+      )}
       <DataGrid
         columns={columns}
         rows={rows}
         columnGroupingModel={columnGroupingModel(quantity)}
+        processRowUpdate={(updated) => {
+          const hasError = validateRow(updated, quantity);
+
+          if (hasError) {
+            setError(hasError);
+            return updated;
+          }
+
+          setError(undefined);
+          const nextDayShifts = rowToShifts(updated, quantity);
+          dispatch(setDay({ date: updated.dateISO, shifts: nextDayShifts }));
+
+          return updated;
+        }}
+        onProcessRowUpdateError={(err) => console.error(err)}
       />
     </Box>
   );

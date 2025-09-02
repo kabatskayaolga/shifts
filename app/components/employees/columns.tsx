@@ -26,6 +26,14 @@ export const columns: Columns = (contracts, totalsByEmp) => {
       editable: true,
       type: "singleSelect",
       valueOptions: contracts.map((e) => e),
+      preProcessEditCellProps: (params) => {
+        const limit =
+          contractMap.get(params.props.value)?.maxMinutesPerMonth ?? 0;
+
+        const minutes = totalsByEmp[params.row.id] ?? 0;
+        const hasError = minutes > limit;
+        return { ...params.props, error: hasError };
+      },
     },
 
     {
@@ -42,12 +50,13 @@ export const columns: Columns = (contracts, totalsByEmp) => {
         return 0;
       },
       renderCell: ({ value, row }) => {
-        const minutes = Number(value) || 0;
+        const minutes = Number(value) ?? 0;
         const fact = mmToHHMM(minutes);
 
         const limit = contractMap.get(row.contract)?.maxMinutesPerMonth;
         return limit ? `${fact} / ${mmToHHMM(limit)}` : fact;
       },
+
       sortComparator: (a, b) => Number(a) - Number(b),
     },
   ];

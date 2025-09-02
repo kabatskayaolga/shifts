@@ -54,7 +54,17 @@ export default function Employees() {
 
   return (
     <Box sx={{ width: "100%", maxWidth: "430px" }}>
-      <DataGrid rows={employees} columns={cols} />
+      <DataGrid
+        rows={employees}
+        columns={cols}
+        editMode="row"
+        processRowUpdate={(updated) => {
+          return updated;
+        }}
+        onProcessRowUpdateError={(err) => {
+          console.error(err);
+        }}
+      />
     </Box>
   );
 }
